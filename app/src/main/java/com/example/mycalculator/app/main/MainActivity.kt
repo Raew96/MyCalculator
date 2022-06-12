@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.Surface
+import androidx.core.view.WindowCompat
 import com.example.mycalculator.R
+import com.example.mycalculator.app.theme.AppTheme
+import com.example.mycalculator.util.rememberWindowSizeClass
 
 class MainActivity : ComponentActivity() {
 
@@ -22,8 +26,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            MainRoot(finishApp = finish)
+            val windowSizeClass = rememberWindowSizeClass()
+            AppTheme {
+                Surface() {
+                    MainRoot(finishApp = finish)
+                }
+            }
         }
     }
 }
